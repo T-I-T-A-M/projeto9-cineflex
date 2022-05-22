@@ -11,10 +11,10 @@ export default function App() {
         <>
         <Navbar />
         <BrowserRouter>
-        <Routes>
-            <Route path="/" element= {<Home />} />
-            <Route path="/sessoes/:`${id}`" element = {<Schedule />} />
-        </Routes>
+            <Routes>
+                <Route path="/" element= {<Home />} />
+                <Route path="/sessoes/:movieId" element = {<Schedule />} />
+            </Routes>
         </BrowserRouter>
 
         </>

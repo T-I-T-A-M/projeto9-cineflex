@@ -13,6 +13,7 @@ export default function Movie ({ movieId, title, url, overview, releaseDate, ind
 
 return (
 <>
+    <Link to={`/sessoes/${movieId}`}>
     <Main
     movieId={movieId}
     title={title}
@@ -26,7 +27,7 @@ return (
         <MovieImg src={url}></MovieImg>
             
     </Main>
-    
+    </Link>
 </>
     
 
