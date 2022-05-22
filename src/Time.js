@@ -1,4 +1,6 @@
 import styled from "styled-components"
+import { Link } from 'react-router-dom';
+
 
 export default function Time ({ showtimes }) {
 
@@ -8,16 +10,19 @@ export default function Time ({ showtimes }) {
 
     return(
         <TimeBlock>
-            {showtimes.map((showtime,index) =>
-                <Main
-                time={showtime.name}
-                timeId={showtime.id}
-                key={index}
-                >
-                {showtime.name}
-                
-                
-                </Main> )
+            {showtimes.map((props,index) =>
+
+                <Link to={`/assentos/${props.id}`}>
+                    <Main
+                    time={props.name}
+                    timeId={props.id}
+                    key={index}
+                    >
+                    {props.name}
+                    
+                    
+                    </Main>
+                </Link> )
                 }
 
         </TimeBlock>
@@ -30,7 +35,6 @@ export default function Time ({ showtimes }) {
 const TimeBlock = styled.div`
 display:flex;
 `
-
 
 const Main = styled.div`
 width: 83px;

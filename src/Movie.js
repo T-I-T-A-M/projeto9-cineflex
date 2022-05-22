@@ -14,7 +14,7 @@ export default function Movie ({ movieId, title, url, overview, releaseDate, ind
 return (
 <>
     <Link to={`/sessoes/${movieId}`}>
-    <Main
+    <Main 
     movieId={movieId}
     title={title}
     overview={overview}
