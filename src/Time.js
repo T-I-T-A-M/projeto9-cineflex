@@ -14,8 +14,8 @@ export default function Time ({ showtimes }) {
 
                 <Link to={`/assentos/${props.id}`}>
                     <Main
-                    time={props.name}
-                    timeId={props.id}
+                    sessionTime={props.name}
+                    sessionId={props.id}
                     key={index}
                     >
                     {props.name}
