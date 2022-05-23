@@ -10,10 +10,12 @@ export default function App() {
 
     const [hour, setHour] = useState("")
     const [date, setDate] = useState("")
+    const [time, setTime] = useState("")
     const [movie, setMovie] = useState("")
     const [buyerCPF, setBuyerCPF] =useState("")
     const [buyerName, setBuyerName] =useState("")
     const [selectedSeat, setSelectedSeat] =useState([])
+    const [seatName, setSeatName] =useState([])
 
 
 
@@ -25,14 +27,29 @@ export default function App() {
             <Routes>
                 <Route path="/" element= {<Home />} />
                 <Route path="/sessoes/:movieId" element = {<Schedule />} />
-                <Route path="/assentos/:sessionId" element = {<Seats />} />
+                <Route path="/assentos/:sessionId" element = {<Seats 
+                setHour={setHour}
+                setDate={setDate}
+                setTime={setTime}
+                setMovie={setMovie}
+                setBuyerCPF={setBuyerCPF}
+                setBuyerName={setBuyerName}
+                setSelectedSeat={setSelectedSeat}
+                selectedSeat={selectedSeat}
+                setSeatName={setSeatName}
+                seatName={seatName}
+                buyerCPF={buyerCPF}
+                buyerName={buyerName}
+                
+                />} />
                 <Route path="/sucess" element ={<Sucess
                 hour={hour}
                 date={date}
+                time={time}
                 movie={movie}
                 buyerCPF={buyerCPF}
                 buyerName={buyerName}
-                selectedSeat={selectedSeat}
+                seatName={seatName}
 
                 />} />
 

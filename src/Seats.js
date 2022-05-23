@@ -3,39 +3,55 @@ import axios from "axios";
 import { Link, useParams } from 'react-router-dom';
 import { React, useState, useEffect } from 'react';
 
-export default function Seats (){
+export default function Seats ( { 
+    setHour,
+    setDate,
+    setMovie,
+    setBuyerCPF,
+    setBuyerName,
+    setSeatName,
+    seatName,
+    setSelectedSeat,
+    selectedSeat,
+    buyerCPF,
+    buyerName
+    }){ 
 
     const { sessionId } = useParams()
 
     const [sessionData, setSessionData] = useState([])
     const [movieData, setMovieData] = useState([])
+
+    
     const [seatsData, setSeatsData] = useState([])
-    const [selectedSeat, setSelectedSeat] = useState([])
-    const [buyerName, setBuyerName] = useState("")
-    const [buyerCPF,setBuyerCPF] =useState("")
+
+
     const [select, setSelected] =useState(false)
 
-    const [hour, setHour] = useState("")
-    const [date, setDate] = useState("")
-    const [movie, setMovie] = useState("")
 
 
     
 
     let tempSeat =[]
+    let tempSeatName=[]
 
-    function selectSeat (seat) {
+    console.log(selectedSeat)
+    function selectSeat (seat,name) {
         const index = selectedSeat.indexOf(seat)
-
+        console.log(name)
         if (selectedSeat.includes(seat)){
             selectedSeat.splice(index,1)
+            seatName.splice(index,1)
             return setSelected(!select)
         } else {
             tempSeat= [...selectedSeat,seat]
+            tempSeatName=[...seatName,name]
             setSelectedSeat(tempSeat)
+            setSeatName(tempSeatName)
             return setSelected(!select)
         }
-
+        
+        
     }
 
 
@@ -46,7 +62,15 @@ export default function Seats (){
     function Book() {
         console.log(selectedSeat, buyerCPF, buyerName)
 
-        
+            setHour(sessionData.name)
+            setDate(sessionData.day.date)
+            setMovie(movieData.title)
+            setBuyerCPF(buyerCPF)
+            setBuyerName(buyerName)
+            setSelectedSeat(selectedSeat)
+            setSeatName(seatName)
+
+
             const post = axios.post (`https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many`,
             {ids: selectedSeat,
             name:buyerName,
@@ -72,8 +96,10 @@ export default function Seats (){
         const promise = axios.get (`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${sessionId}/seats`)
 
         promise.then (request =>{
+            setSessionData(request.data)
             setSeatsData(request.data.seats)
-            
+            setMovieData(request.data.movie)
+                       
             
         })    
     },[] ) 
@@ -88,7 +114,7 @@ export default function Seats (){
             <RenderSeat
                 id={props.id}
                 name={props.name}
-                onClick={() => selectSeat(props.id)}
+                onClick={() => selectSeat(props.id, props.name)}
                 key={index}
                 select={select}
                 isAvailable={props.isAvailable}
